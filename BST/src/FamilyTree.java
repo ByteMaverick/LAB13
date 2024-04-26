@@ -29,8 +29,12 @@ public class FamilyTree
         
         void addChild(TreeNode childNode)
         {
+
             // Add childNode to this node's children list. Also
             // set childNode's parent to this node.
+			children.add(childNode);
+			childNode.parent = this;
+
         }
         
         
@@ -39,14 +43,21 @@ public class FamilyTree
         TreeNode getNodeWithName(String targetName)
         {
             // Does this node have the target name?
-            if (?????)
+            if (name.equals(targetName))
                 return this;
                     
             // No, recurse. Check all children of this node.
             for (TreeNode child: children)
             {
+				TreeNode foundname = child.getNodeWithName(targetName);
+
+				if(foundname != null){
+					return  foundname;
+				}
                 // If child.getNodeWithName(targetName) returns a non-null node,
                 // then that's the node we're looking for. Return it.
+
+
             }
             
             // Not found anywhere.
@@ -65,10 +76,17 @@ public class FamilyTree
             // draw a tree, mark any leaf node, and then mark its ancestors in order from
             // recent to ancient. Expect a question about this on the final exam.
 
+			TreeNode currentNode = this;
+			while (currentNode.parent != null) {
+				ancestors.add(currentNode.parent); // Add the parent node to the ancestors list
+				currentNode = currentNode.parent; // Move to the parent node
+			}
             return ancestors;
         }
-        
-        
+
+
+
+
         public String toString()
         {
             return toStringWithIndent("");
