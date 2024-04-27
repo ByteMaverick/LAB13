@@ -1,7 +1,14 @@
-Meresankh: Hetepheres,Meritites
-Hetepheres :Sneferu, Meritites
-Meritites:Khufu,Henutsen,Rahotep,Nefermaat,Itet
-Djedefhor:Meresankh,Kawab,Hetepheres,Djedefre,Khentetka,Khafre
-Setka:Baka,Neferhetepes,Hernet,Menkaura
-Shepseskaf:Bunefer
-
+Ouranos:Cronus,Rhea,Hyperion,Iapetus
+Cronus:Rhea,Zeus,Hades,Poseidon,Hera,Demeter,Hestia
+Rhea:Zeus,Hades,Poseidon,Hera,Demeter,Hestia
+Hyperion:Helios,Selene,Eos
+Iapetus:Atlas,Prometheus,Epimetheus,Menoetius
+Zeus:Hera,Demeter,Metis,Maia,Leto,Semele,Alcmene,Europa
+Hera:Ares,Hebe,Hephaestus
+Demeter:Persephone
+Metis:Athena
+Maia:Hermes
+Leto:Apollo,Artemis
+Semele:Dionysus
+Alcmene:Heracles
+Europa:Minos,Sarpedon,Rhadamanthus
