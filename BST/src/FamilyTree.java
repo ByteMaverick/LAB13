@@ -7,27 +7,27 @@ import javax.swing.filechooser.*;
 public class FamilyTree
 {
     
-    private static class TreeNode
+    private static class TreeNode<T> // bonus (generic)
     {
-        private String                    name;
-        private TreeNode                parent;
-        private ArrayList<TreeNode>        children;
+        private T data ;   // name change to data
+        private TreeNode         <T>       parent;
+        private ArrayList<TreeNode<T>>        children;
         
         
-        TreeNode(String name)
+        TreeNode(T name)
         {
-            this.name = name;
+            this.data = name;
             children = new ArrayList<>();
         }
         
         
-        String getName()
+        T getData()
         {
-            return name;
+            return data;
         }
         
         
-        void addChild(TreeNode childNode)
+        void addChild(TreeNode<T> childNode)
         {
 
             // Add childNode to this node's children list. Also
@@ -40,10 +40,10 @@ public class FamilyTree
         
         // Searches subtree at this node for a node
         // with the given name. Returns the node, or null if not found.
-        TreeNode getNodeWithName(String targetName)
+        TreeNode getNodeWithName(T targetName)
         {
             // Does this node have the target name?
-            if (name.equals(targetName))
+            if (data.equals(targetName))
                 return this;
                     
             // No, recurse. Check all children of this node.
@@ -67,19 +67,19 @@ public class FamilyTree
         
         // Returns a list of ancestors of this TreeNode, starting with this node’s parent and
         // ending with the root. Order is from recent to ancient.
-        ArrayList<TreeNode> collectAncestorsToList()
+        ArrayList<TreeNode<T>> collectAncestorsToList()
         {
-            ArrayList<TreeNode> ancestors = new ArrayList<>();
+            ArrayList<TreeNode<T>> ancestors = new ArrayList<>();
 
             // ?????  Collect ancestors of this TreeNode into the array list. HINT: going up
             // the nodes of a tree is like traversing a linked list. If that isn’t clear,
             // draw a tree, mark any leaf node, and then mark its ancestors in order from
             // recent to ancient. Expect a question about this on the final exam.
 
-			TreeNode currentNode = this;
+			TreeNode<T> currentNode = this;
 			while (currentNode.parent != null) {
-				ancestors.add(currentNode.parent); // Add the parent node to the ancestors list
-				currentNode = currentNode.parent; // Move to the parent node
+				ancestors.add(currentNode.parent);
+				currentNode = currentNode.parent;
 			}
             return ancestors;
         }
@@ -95,15 +95,15 @@ public class FamilyTree
         
         private String toStringWithIndent(String indent)
         {
-            String s = indent + name + "\n";
+            String s = indent + data + "\n";
             indent += "  ";
-            for (TreeNode childNode: children)
+            for (TreeNode<T> childNode: children)
                 s += childNode.toStringWithIndent(indent);
             return s;
         }
     }
 
-	private TreeNode			root;
+	private TreeNode  <String> root;
 	
 	
 	//
@@ -161,13 +161,13 @@ public class FamilyTree
 		} else {
 			parentNode = root.getNodeWithName(parent);
 			if (parentNode == null) {
-				throw new TreeException("Parent node not found: " + parent);
+				throw new TreeException(" node not found: " + parent);
 			}
 		}
 
 		// Add child nodes to parentNode.
 		for (String childName : childrenArray) {
-			TreeNode childNode = new TreeNode(childName.trim());
+			TreeNode childNode = new TreeNode(childName);
 			parentNode.addChild(childNode);
 		}
 	}
@@ -227,7 +227,7 @@ public class FamilyTree
 			FamilyTree tree = new FamilyTree();
 			System.out.println("Tree:\n" + tree + "\n**************\n");
 			TreeNode ancestor = tree.getMostRecentCommonAncestor("Bilbo", "Frodo");
-			System.out.println("Most recent common ancestor of Bilbo and Frodo is " + ancestor.getName());
+			System.out.println("Most recent common ancestor of Bilbo and Frodo is " + ancestor.getData());
 		}
 		catch (IOException x)
 		{
