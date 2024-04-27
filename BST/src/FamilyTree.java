@@ -140,41 +140,46 @@ public class FamilyTree
 	// Line format is "parent:child1,child2 ..."
 	// Throws TreeException if line is illegal.
 	//
-	private void addLine(String line) throws TreeException
-	{
+	private void addLine(String line) throws TreeException {
 		// Extract parent and array of children.
 		int colonIndex = line.indexOf(':');
 		if (colonIndex < 0) {
-			throw new TreeException ("Invalid" + line);
+			throw new TreeException("Invalid" + line);
 		}
-		String parent = line.substring(0,colonIndex);
+		String parent = line.substring(0, colonIndex);
 
-		String childrenString = line.substring(colonIndex +1);
+		String childrenString = line.substring(colonIndex + 1);
 		String[] childrenArray = childrenString.split(",");
+
 		// Find parent node. If root is null then the tree is empty and the
-		// parent node must be constructed. Otherwise the parent node should be 
+		// parent node must be constructed. Otherwise, the parent node should be
 		// somewhere in the tree.
 		TreeNode parentNode;
-		if (root == null)
-			parentNode = root = new TreeNode(parent);
-
-		else
-		{
-			parentNode = root.getNodeWithName(line) ;
+		if (root == null) {
+			parentNode = new TreeNode(parent);
+			root = parentNode;
+		} else {
+			parentNode = root.getNodeWithName(parent);
+			if (parentNode == null) {
+				throw new TreeException("Parent node not found: " + parent);
+			}
 		}
-		
+
+		// Add child nodes to parentNode.
+		for (String childName : childrenArray) {
+			TreeNode childNode = new TreeNode(childName.trim());
+			parentNode.addChild(childNode);
+		}
+	}
 		// Add child nodes to parentNode.
 
 
 
 
-		for (String childName : childrenArray) {
-			TreeNode childNode = new TreeNode(childName.trim());
-			parentNode.addChild(childNode);
-		}
 
 
-	}
+
+
 	
 	
 	// Returns the "deepest" node that is an ancestor of the node named name1, and also is an
