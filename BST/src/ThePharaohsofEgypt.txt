@@ -1,0 +1,7 @@
+Meresankh: Hetepheres,Meritites
+Hetepheres :Sneferu, Meritites
+Meritites:Khufu,Henutsen,Rahotep,Nefermaat,Itet
+Djedefhor:Meresankh,Kawab,Hetepheres,Djedefre,Khentetka,Khafre
+Setka:Baka,Neferhetepes,Hernet,Menkaura
+Shepseskaf:Bunefer
+
